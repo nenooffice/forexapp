@@ -24,6 +24,8 @@ export class UsersService {
       email: dto.email,
       password: hashedPassword,
     };
+    
+    return this.prisma.user.create({ data, select: this.userSelect });
   }
 
   remove(id: string) {
