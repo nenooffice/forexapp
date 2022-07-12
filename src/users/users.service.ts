@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { User } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -13,8 +13,19 @@ export class UsersService {
     email: true,
     updatedAt: true,
     createdAt: true,
-  }
+  };
   constructor(private readonly prisma: PrismaService) {}
+
+  async verifyIdAndReturnUser(id: string): Promise<User> {
+    const user: User = await this.prisma.user.findUnique({
+      where: { id },
+      select: this.userSelect,
+    });
+
+    if (!user) {
+      throw new NotFoundException(`Id ${id} not found.`);
+    }
+  }
 
   async create(dto: CreateUserDto): Promise<User | void> {
     const hashedPassword = await bcrypt.hash(dto.password, 8);
@@ -24,17 +35,26 @@ export class UsersService {
       email: dto.email,
       password: hashedPassword,
     };
+
+    return this.prisma.user.create({ data, select: this.userSelect });
   }
 
-  remove(id: string) {
-    throw new Error('Method not implemented.');
+  async remove(id: string) {
+    return this.prisma.user.delete({
+      where: { id },
+      select: this.userSelect,
+    });
   }
 
-  update(id: string, dto: UpdateUserDto): Promise<void | import("./entity/users.entity").User> {
-    throw new Error('Method not implemented.');
+  async update(id: string, dto: UpdateUserDto): Promise<User | void> {
+    return this.prisma.user.update({
+      where: { id },
+      data: dto,
+      select: this.userSelect,
+    });
   }
 
-  findOne(id: string): Promise<import('./entity/users.entity').User> {
-    throw new Error('Method not implemented.');
+  findOne(id: string): Promise<User> {
+
   }
 }

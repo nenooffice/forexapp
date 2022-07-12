@@ -3,7 +3,7 @@ export class User {
   name: string;
   email: string;
   password?: string;
-  balance: number;
+  balance?: number;
   createdAt: Date;
   updatedAt: Date;
 }
