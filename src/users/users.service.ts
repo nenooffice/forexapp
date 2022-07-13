@@ -11,6 +11,8 @@ export class UsersService {
     id: true,
     name: true,
     email: true,
+    password: false,
+    balance: false,
     updatedAt: true,
     createdAt: true,
   };
@@ -25,9 +27,10 @@ export class UsersService {
     if (!user) {
       throw new NotFoundException(`Id ${id} not found.`);
     }
+    return user;
   }
 
-  async create(dto: CreateUserDto): Promise<User | void> {
+  async create(dto: CreateUserDto) {
     const hashedPassword = await bcrypt.hash(dto.password, 8);
 
     const data: CreateUserDto = {
@@ -55,6 +58,6 @@ export class UsersService {
   }
 
   findOne(id: string): Promise<User> {
-
+    return this.verifyIdAndReturnUser(id);
   }
 }
