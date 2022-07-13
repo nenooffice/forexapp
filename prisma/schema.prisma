@@ -15,7 +15,6 @@ model User {
   name String @unique
   email String @unique
   password String
-  balance Int @db.Int
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
   @@map("user")
