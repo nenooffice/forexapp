@@ -25,6 +25,7 @@ export class UsersService {
     if (!user) {
       throw new NotFoundException(`Id ${id} not found.`);
     }
+    return user;
   }
 
   async create(dto: CreateUserDto): Promise<User | void> {
