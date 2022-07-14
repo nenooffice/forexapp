@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
-// import { UpdateUserDto } from './dto/update-user.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
 import * as bcrypt from 'bcryptjs';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { User } from './entities/user.entity';
@@ -31,7 +31,11 @@ export class UsersService {
           id: dto.wallet,
         },
       },
-      // transactions: dto.transactions,
+      transactions: {
+        connect: {
+          id: dto.transactions,
+        },
+      },
     };
     return this.prisma.user.create({ data, select: this.userSelect });
   }
@@ -57,15 +61,15 @@ export class UsersService {
     return this.verifyIdAndReturnUser(id);
   }
 
-  // async update(id: string, dto: UpdateUserDto) {
-  //   await this.verifyIdAndReturnUser(id);
+  async update(id: string, dto: UpdateUserDto) {
+    await this.verifyIdAndReturnUser(id);
 
-  //   return this.prisma.user.update({
-  //     where: { id },
-  //     data: dto,
-  //     select: this.userSelect,
-  //   });
-  // }
+    return this.prisma.user.update({
+      where: { id },
+      data: dto,
+      select: this.userSelect,
+    });
+  }
 
   async remove(id: string) {
     await this.verifyIdAndReturnUser(id);
