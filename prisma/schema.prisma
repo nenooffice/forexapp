@@ -34,7 +34,7 @@ model Transactions {
 model Wallet {
   id      String         @id @default(auto()) @map("_id") @db.ObjectId
   value   Int
-  history Transactions[]
-  user    User?          @relation(fields: [userId], references: [id])
+  transactions Transactions[]
+  user    User?          @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId  String?
 }

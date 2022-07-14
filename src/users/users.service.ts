@@ -40,7 +40,7 @@ export class UsersService {
     });
 
     if (!user) {
-      throw new NotFoundException(`Id entry '${id}' not founded.`);
+      throw new NotFoundException(`Id entry '${id}' not found.`);
     }
 
     return user;
