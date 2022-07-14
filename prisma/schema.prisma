@@ -10,31 +10,31 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  name      String   @unique
-  email     String   @unique
-  password  String
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
-
-  @@map("user")
-  wallet Wallet[]
-}
-
 model Transactions {
-  id         String   @id @default(auto()) @map("_id") @db.ObjectId
-  createdAt  DateTime @default(now()) @map("created_at")
-  currency   String
-  tradeValue Int
-  wallet     Wallet?  @relation(fields: [walletId], references: [id])
-  walletId   String?
+  id            String      @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt     DateTime    @default(now()) @map("created_at")
+  currency      String
+  currencyValue Int
+  tradeValue    Int
+  // user          User[]
 }
 
 model Wallet {
-  id      String         @id @default(auto()) @map("_id") @db.ObjectId
-  value   Int
-  transactions Transactions[]
-  user    User?          @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId  String?
+  id            String      @id @default(auto()) @map("_id") @db.ObjectId
+  value         Int
+  user          User[]
 }
+
+model User {
+  id            String       @id @default(auto()) @map("_id") @db.ObjectId
+  name          String       @unique
+  email         String       @unique
+  password      String
+  createdAt     DateTime     @default(now()) @map("created_at")
+  updatedAt     DateTime     @updatedAt @map("updated_at")
+  wallet        Wallet       @relation(fields: [walletId], references: [id])
+  walletId      String       @db.ObjectId
+  // transactions   Transactions @relation(fields: [transactionsId], references: [id])
+  // transactionsId String       @db.ObjectId
+}
+

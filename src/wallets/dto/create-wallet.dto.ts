@@ -8,10 +8,4 @@ export class CreateWalletDto {
     description: ' Add a Value to your wallet. (USD dollar)',
   })
   value: number;
-
-  @ApiProperty({
-    example: '',
-    description: `Get's User Trade History`,
-  })
-  transactions: any[];
 }

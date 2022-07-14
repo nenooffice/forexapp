@@ -12,13 +12,11 @@ export class WalletsService {
   private walletSelect = {
     id: false,
     value: true,
-    transactions: true,
   };
 
   async create(dto: CreateWalletDto) {
     const data: CreateWalletDto = {
       value: dto.value,
-      transactions: dto.transactions,
     };
 
     return this.prisma.wallet.create({ data, select: this.walletSelect });
