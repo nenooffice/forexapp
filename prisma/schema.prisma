@@ -11,12 +11,30 @@ datasource db {
 }
 
 model User {
-  id String @id @default(uuid()) @map("_id") @db.ObjectId
-  name String @unique
-  email String @unique
-  password String
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  name      String   @unique
+  email     String   @unique
+  password  String
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
+
   @@map("user")
+  wallet Wallet[]
 }
 
+model Transactions {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt  DateTime @default(now()) @map("created_at")
+  currency   String
+  tradeValue Int
+  wallet     Wallet?  @relation(fields: [walletId], references: [id])
+  walletId   String?
+}
+
+model Wallet {
+  id      String         @id @default(auto()) @map("_id") @db.ObjectId
+  value   Int
+  history Transactions[]
+  user    User?          @relation(fields: [userId], references: [id])
+  userId  String?
+}
