@@ -22,7 +22,8 @@ model Transactions {
 
 model Wallet {
   id             String      @id @default(auto()) @map("_id") @db.ObjectId
-  value          Int
+  valueUSD       Int
+  valueGBP       Int
   user           User[]
 }
 
