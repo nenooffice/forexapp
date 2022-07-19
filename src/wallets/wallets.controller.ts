@@ -17,6 +17,9 @@ export class WalletsController {
   }
 
   @Get(':id')
+  @ApiOperation({
+    summary: 'Show Wallet related per ID.',
+  })
   findOne(@Param('id') id: string) {
     return this.walletsService.findOne(id);
   }

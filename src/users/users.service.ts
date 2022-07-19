@@ -31,11 +31,11 @@ export class UsersService {
           id: dto.wallet,
         },
       },
-      transactions: {
-        connect: {
-          id: dto.transactions,
-        },
-      },
+      // transactions: {
+      //   connect: {
+      //     id: dto.transactions,
+      //   },
+      // },
     };
     return this.prisma.user.create({ data, select: this.userSelect });
   }

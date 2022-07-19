@@ -4,7 +4,9 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, {
+    cors: true,
+  });
 
   app.useGlobalPipes(new ValidationPipe());
 
@@ -12,7 +14,7 @@ async function bootstrap() {
     .setTitle('Forex Trading App')
     .setDescription('Forex Trading App API/Backend')
     .setVersion('0.0.1')
-    .addTag('users')
+    .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('docs', app, document);

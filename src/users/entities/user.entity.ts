@@ -4,7 +4,7 @@ export class User {
   email: string;
   password?: string;
   wallet?: any;
-  transactions?: any;
+  // transactions?: any;
   createdAt: Date;
   updatedAt: Date;
 }

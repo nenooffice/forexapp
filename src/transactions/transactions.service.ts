@@ -4,6 +4,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateTransactionDto } from './dto/create-transaction.dto';
 import { UpdateTransactionDto } from './dto/update-transaction.dto';
 import fetch from 'axios';
+import { Wallet } from 'src/wallets/entities/wallet.entity';
 
 @Injectable()
 export class TransactionsService {
@@ -17,6 +18,16 @@ export class TransactionsService {
     tradeValue: true,
     currencyValue: true,
   };
+
+  async amount(id: string) {
+    const amount: Partial<Wallet> = await this.prisma.wallet.findUnique({
+      where: { id },
+      select: { value: true },
+    });
+
+    return amount;
+  }
+
   async create(dto: CreateTransactionDto) {
     const conversor: {
       date: Date;
@@ -43,11 +54,6 @@ export class TransactionsService {
       .catch((error) => {
         throw new Error(error);
       });
-
-    // const amountInWallet = this.prisma.wallet.findUnique({
-    //   where: { id },
-    //   select: value,
-    // });
 
     const data: Prisma.TransactionsCreateInput = {
       currencyActual: dto.currencyActual,
