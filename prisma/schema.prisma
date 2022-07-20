@@ -10,6 +10,12 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+generator erd {
+  provider = "prisma-erd-generator"
+  output = "../db.pdf"
+}
+
+
 model Transactions {
   id             String      @id @default(auto()) @map("_id") @db.ObjectId
   createdAt      DateTime    @default(now()) @map("created_at")

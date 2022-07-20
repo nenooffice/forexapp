@@ -1,72 +1,70 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Forex App API
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Project developed for Westpoint Academy.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Requirement
 
-## Description
+- **Node** with version superior or same as 16.15.0 - [Node Download](https://nodejs.org/pt-br/download/)
+- **NPM** with version superior or same as 8.5.5 - [Npm Download](https://www.npmjs.com/package/download)
+- **Nest.js** with version superior or same as 8.5.5 - [Nest Download](https://docs.nestjs.com/)
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
-## Installation
+## Instalation
+
+Clone this project in your PC with this command (Key SSH needed):
 
 ```bash
+#!/bin/bash
+$ git clone git.github.com/nenooffice/projeto-M4.git
+```
+
+Acess you project folder:
+
+```bash
+#!/bin/bash
+$ cd projeto-M4
+```
+Install the dependencies with nthis command:
+
+```bash
+#!/bin/bash
 $ npm install
 ```
 
-## Running the app
+## Execution
+
+After installed dependencies, use the next command to execute your project on a local server.
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
+#!/bin/bash
 $ npm run start:dev
+```
+To work with a local or cloud database, you should create an .env file and add a connection URL, like example:
 
-# production mode
-$ npm run start:prod
+```md
+DATABASE_URL="mongodb+srv://admin:12345@appforex.xyzabc.mongodb.net/test"
 ```
 
-## Test
+As a additional, the application requires and JWT secret, as the example:
 
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+```md
+JWT_SECRET="055e0c8e-df4b-4856-9b05-548aa95fcb95"
 ```
 
-## Support
+## Funcionalities
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+To acess all endpoints list and application funcionalities, read our documentation on (Swagger)
+(http://localhost:3334/docs/).
 
-## Stay in touch
+Also, you can analize our <a href="./db.pdf" download>Entity Relationship Diagram</a>
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+## Author
+
+- Eugenio Bufalo Rodrigues
+
+
+<div>
+<a href="https://www.linkedin.com/in/eugenio-neno-rodrigues/" target="_blank"><img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank"></a>
 
 ## License
 
