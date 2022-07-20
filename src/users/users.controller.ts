@@ -16,8 +16,6 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
 
-@UseGuards(AuthGuard())
-@ApiBearerAuth()
 @ApiTags('users')
 @Controller('users')
 export class UsersController {
@@ -40,8 +38,6 @@ export class UsersController {
   }
 
   @Get(':id')
-  @UseGuards(AuthGuard())
-  @ApiBearerAuth()
   @ApiOperation({
     summary: 'Show Unique User per ID.',
   })
@@ -50,8 +46,6 @@ export class UsersController {
   }
 
   @Patch(':id')
-  @UseGuards(AuthGuard())
-  @ApiBearerAuth()
   @ApiOperation({
     summary: 'Update User Data.',
   })
@@ -60,8 +54,6 @@ export class UsersController {
   }
 
   @Delete(':id')
-  @UseGuards(AuthGuard())
-  @ApiBearerAuth()
   @HttpCode(HttpStatus.NO_CONTENT)
   @ApiOperation({
     summary: 'Delete User.',

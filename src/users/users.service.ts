@@ -13,6 +13,7 @@ export class UsersService {
     name: true,
     email: true,
     wallet: true,
+    transactions: true,
     updatedAt: true,
     createdAt: true,
   };
@@ -26,16 +27,6 @@ export class UsersService {
       name: dto.name,
       email: dto.email,
       password: hashedPassword,
-      wallet: {
-        connect: {
-          id: dto.wallet,
-        },
-      },
-      transactions: {
-        connect: {
-          id: dto.transactions,
-        },
-      },
     };
     return this.prisma.user.create({ data, select: this.userSelect });
   }

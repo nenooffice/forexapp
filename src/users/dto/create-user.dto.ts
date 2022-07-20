@@ -2,6 +2,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import {
   IsEmail,
   IsNotEmpty,
+  IsOptional,
   IsString,
   Matches,
   MinLength,
@@ -35,15 +36,17 @@ export class CreateUserDto {
   })
   password: string;
 
+  @IsOptional()
   @ApiProperty({
     example: `{ id: '12421wfsdwfdsdgfsdfg', value: '10000' }`,
     description: `Wallet's info.`,
   })
-  wallet: any;
+  walletId: any;
 
+  @IsOptional()
   @ApiProperty({
     example: `"transactions": { id: 'sadgfsf234wfw', currency: 'USD', tradeValue: '200' }`,
     description: `Transaction info.`,
   })
-  transactions: any;
+  transactionsId: any;
 }

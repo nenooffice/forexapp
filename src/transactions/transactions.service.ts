@@ -2,9 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateTransactionDto } from './dto/create-transaction.dto';
-import { UpdateTransactionDto } from './dto/update-transaction.dto';
 import fetch from 'axios';
-import { Wallet } from 'src/wallets/entities/wallet.entity';
 
 @Injectable()
 export class TransactionsService {
@@ -22,7 +20,7 @@ export class TransactionsService {
   // async amount(id: string) {
   //   const amount: Partial<Wallet> = await this.prisma.wallet.findUnique({
   //     where: { id },
-  //     select: { value: true },
+  //     select: { valueUSD: true },
   //   });
 
   //   return amount;
@@ -73,13 +71,5 @@ export class TransactionsService {
 
   findOne(id: number) {
     return `This action returns a #${id} transaction`;
-  }
-
-  update(id: number, updateTransactionDto: UpdateTransactionDto) {
-    return `This action updates a #${id} transaction`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} transaction`;
   }
 }

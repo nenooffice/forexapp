@@ -11,7 +11,8 @@ export class WalletsService {
 
   private walletSelect = {
     id: false,
-    value: true,
+    valueUSD: true,
+    valueGBP: true,
   };
 
   async create(dto: CreateWalletDto) {

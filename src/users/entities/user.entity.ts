@@ -3,8 +3,8 @@ export class User {
   name: string;
   email: string;
   password?: string;
-  wallet?: any;
-  // transactions?: any;
   createdAt: Date;
   updatedAt: Date;
+  walletId?: any;
+  transactionsId?: any;
 }
