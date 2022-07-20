@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { PrismaClient } from '@prisma/client';
+import { Prisma, PrismaClient } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateWalletDto } from './dto/create-wallet.dto';
 import { UpdateWalletDto } from './dto/update-wallet.dto';
@@ -15,8 +15,9 @@ export class WalletsService {
   };
 
   async create(dto: CreateWalletDto) {
-    const data: CreateWalletDto = {
-      value: dto.value,
+    const data: Prisma.WalletCreateInput = {
+      valueUSD: dto.valueUSD,
+      valueGBP: dto.valueGBP,
     };
 
     return this.prisma.wallet.create({ data, select: this.walletSelect });

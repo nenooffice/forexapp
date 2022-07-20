@@ -19,14 +19,14 @@ export class TransactionsService {
     currencyValue: true,
   };
 
-  async amount(id: string) {
-    const amount: Partial<Wallet> = await this.prisma.wallet.findUnique({
-      where: { id },
-      select: { value: true },
-    });
+  // async amount(id: string) {
+  //   const amount: Partial<Wallet> = await this.prisma.wallet.findUnique({
+  //     where: { id },
+  //     select: { value: true },
+  //   });
 
-    return amount;
-  }
+  //   return amount;
+  // }
 
   async create(dto: CreateTransactionDto) {
     const conversor: {

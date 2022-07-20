@@ -7,5 +7,12 @@ export class CreateWalletDto {
     example: '1000',
     description: ' Add a Value to your wallet. (USD dollar)',
   })
-  value: number;
+  valueUSD: number;
+
+  @IsNumber()
+  @ApiProperty({
+    example: '1000',
+    description: ' Add a Value to your wallet. (GBP pound)',
+  })
+  valueGBP: number;
 }

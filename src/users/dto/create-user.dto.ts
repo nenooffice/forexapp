@@ -41,9 +41,9 @@ export class CreateUserDto {
   })
   wallet: any;
 
-  // @ApiProperty({
-  //   example: `"transactions": { id: 'sadgfsf234wfw', currency: 'USD', tradeValue: '200' }`,
-  //   description: `Transaction info.`,
-  // })
-  // transactions: any;
+  @ApiProperty({
+    example: `"transactions": { id: 'sadgfsf234wfw', currency: 'USD', tradeValue: '200' }`,
+    description: `Transaction info.`,
+  })
+  transactions: any;
 }
