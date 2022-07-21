@@ -49,12 +49,10 @@ export class UsersController {
     return this.usersService.findOne(id);
   }
 
-  @UseGuards(AuthGuard())
   @Patch(':id')
   @ApiOperation({
     summary: 'Update User Data.',
   })
-  @ApiBearerAuth()
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     return this.usersService.update(id, updateUserDto);
   }

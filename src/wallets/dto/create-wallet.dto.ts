@@ -1,18 +1,18 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNumber } from 'class-validator';
+import { IsString } from 'class-validator';
 
 export class CreateWalletDto {
-  @IsNumber()
+  @IsString()
   @ApiProperty({
     example: '1000',
     description: ' Add a Value to your wallet. (USD dollar)',
   })
-  valueUSD: number;
+  valueUSD: string;
 
-  @IsNumber()
+  @IsString()
   @ApiProperty({
     example: '1000',
     description: ' Add a Value to your wallet. (GBP pound)',
   })
-  valueGBP: number;
+  valueGBP: string;
 }

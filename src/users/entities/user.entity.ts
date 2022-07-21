@@ -5,6 +5,7 @@ export class User {
   password?: string;
   createdAt: Date;
   updatedAt: Date;
-  walletId?: any;
+  walletUSD?: string;
+  walletGBP?: string;
   transactionsId?: any;
 }

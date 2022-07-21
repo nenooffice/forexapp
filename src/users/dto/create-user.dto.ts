@@ -38,10 +38,17 @@ export class CreateUserDto {
 
   @IsOptional()
   @ApiProperty({
-    example: `{ id: '12421wfsdwfdsdgfsdfg', value: '10000' }`,
-    description: `Wallet's info.`,
+    example: `'10000'`,
+    description: `Wallet's USD value.`,
   })
-  walletId: any;
+  walletUSD: string;
+
+  @IsOptional()
+  @ApiProperty({
+    example: `'20000'`,
+    description: `Wallet's GBP value.`,
+  })
+  walletGBP: string;
 
   @IsOptional()
   @ApiProperty({

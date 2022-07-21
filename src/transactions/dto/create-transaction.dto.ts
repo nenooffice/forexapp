@@ -4,6 +4,10 @@ import { IsNotEmpty, IsNumberString, IsString, Matches } from 'class-validator';
 export class CreateTransactionDto {
   @IsString()
   @IsNotEmpty()
+  userId: string;
+
+  @IsString()
+  @IsNotEmpty()
   @Matches(/(?=.*[A-Z])/)
   @ApiProperty({
     example: 'USD',

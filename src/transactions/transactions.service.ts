@@ -1,8 +1,13 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateTransactionDto } from './dto/create-transaction.dto';
 import fetch from 'axios';
+import { Transaction } from './entities/transaction.entity';
+import { User } from 'src/users/entities/user.entity';
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
 
 @Injectable()
 export class TransactionsService {
@@ -10,20 +15,29 @@ export class TransactionsService {
 
   private transactionSelect = {
     id: false,
-    createdAt: false,
+    createdAt: true,
     currencyActual: true,
     currencyWanted: true,
     tradeValue: true,
     currencyValue: true,
   };
 
-  // async amount(id: string) {
-  //   const amount: Partial<Wallet> = await this.prisma.wallet.findUnique({
+  // async getAmountUSD(id: string) {
+  //   const amountUSD: Partial<Wallet> = await this.prisma.wallet.findUnique({
   //     where: { id },
   //     select: { valueUSD: true },
   //   });
 
-  //   return amount;
+  //   return amountUSD;
+  // }
+
+  // async getAmountGBP(id: string) {
+  //   const amountGBP: Partial<Wallet> = await this.prisma.wallet.findUnique({
+  //     where: { id },
+  //     select: { valueGBP: true },
+  //   });
+
+  //   return amountGBP;
   // }
 
   async create(dto: CreateTransactionDto) {
@@ -59,6 +73,81 @@ export class TransactionsService {
       tradeValue: dto.tradeValue,
       currencyValue: conversor.result.toString(),
     };
+
+    async function getWalletValue(id: string) {
+      const walletUSD: Partial<User> = await prisma.user.findUnique({
+        where: { id },
+        select: { walletUSD: true },
+      });
+
+      const walletGBP: Partial<User> = await prisma.user.findUnique({
+        where: { id },
+
+        select: { walletGBP: true },
+      });
+
+      return { walletGBP, walletUSD };
+    }
+
+    async function checkUSDValue() {
+      console.log(await getWalletValue(dto.userId));
+      const walletUSD = (await getWalletValue(dto.userId)).walletUSD;
+
+      const value = data.tradeValue;
+
+      console.log(walletUSD);
+
+      if (walletUSD < value) {
+        return false;
+      }
+
+      return parseFloat(walletUSD.toString());
+    }
+
+    async function checkGBPValue() {
+      const walletGBP = (await getWalletValue(dto.userId)).walletGBP;
+
+      const value = data.tradeValue;
+
+      if (walletGBP < value) {
+        return false;
+      }
+      return parseFloat(walletGBP.toString());
+    }
+
+    async function checkWalletValue() {
+      const currency = data.currencyWanted;
+      const tradeValue = Number(data.tradeValue);
+      const converted = Number(data.currencyValue);
+      const walletUSD = await checkUSDValue();
+      const walletGBP = await checkGBPValue();
+
+      if (currency !== 'USD' && currency !== 'GBP') {
+        throw new NotFoundException('Currency not supported.');
+      } else if (currency === 'GBP') {
+        if ((await checkUSDValue()) === false) {
+          console.log('User does not have the required amount on wallet.');
+        }
+        // } else {
+        //   walletUSD -= tradeValue;
+
+        //   walletGBP += converted;
+
+        //   await prisma.user.update({
+        //     where: { id: dto.userId },
+        //     data: {
+        //       walletGBP: walletGBP.toString(),
+        //       walletUSD: walletUSD.toString(),
+        //     },
+        //   });
+        // }
+      } else if (currency === 'USD') {
+        checkGBPValue();
+      }
+    }
+
+    checkWalletValue();
+
     return this.prisma.transactions.create({
       data,
       select: this.transactionSelect,
@@ -69,7 +158,20 @@ export class TransactionsService {
     return this.prisma.transactions.findMany();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} transaction`;
+  async verifyIdAndReturnTransaction(id: string) {
+    const transaction: Transaction = await this.prisma.transactions.findUnique({
+      where: { id },
+      select: this.transactionSelect,
+    });
+
+    if (!transaction) {
+      throw new NotFoundException(`Transaction Id '${id}' not found.`);
+    }
+
+    return transaction;
+  }
+
+  findOne(id: string) {
+    return this.verifyIdAndReturnTransaction(id);
   }
 }

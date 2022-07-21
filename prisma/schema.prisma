@@ -26,12 +26,6 @@ model Transactions {
   user           User[]
 }
 
-model Wallet {
-  id             String      @id @default(auto()) @map("_id") @db.ObjectId
-  valueUSD       Int
-  valueGBP       Int
-  user           User[]
-}
 
 model User {
   id             String       @id @default(auto()) @map("_id") @db.ObjectId
@@ -40,8 +34,8 @@ model User {
   password       String
   createdAt      DateTime     @default(now()) @map("created_at")
   updatedAt      DateTime     @updatedAt @map("updated_at")
-  wallet         Wallet?       @relation(fields: [walletId], references: [id], onDelete: Cascade)
-  walletId       String?       @db.ObjectId
+  walletUSD      String?
+  walletGBP      String?
   transactions   Transactions? @relation(fields: [transactionsId], references: [id], onDelete: Cascade)
   transactionsId String?       @db.ObjectId
 }
