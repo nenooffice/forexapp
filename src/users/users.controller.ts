@@ -30,34 +30,42 @@ export class UsersController {
   }
 
   @Get()
+  @UseGuards(AuthGuard())
   @ApiOperation({
     summary: 'Show all users.',
   })
+  @ApiBearerAuth()
   findAll() {
     return this.usersService.findAll();
   }
 
   @Get(':id')
+  @UseGuards(AuthGuard())
   @ApiOperation({
     summary: 'Show Unique User per ID.',
   })
+  @ApiBearerAuth()
   findOne(@Param('id') id: string) {
     return this.usersService.findOne(id);
   }
 
+  @UseGuards(AuthGuard())
   @Patch(':id')
   @ApiOperation({
     summary: 'Update User Data.',
   })
+  @ApiBearerAuth()
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     return this.usersService.update(id, updateUserDto);
   }
 
   @Delete(':id')
+  @UseGuards(AuthGuard())
   @HttpCode(HttpStatus.NO_CONTENT)
   @ApiOperation({
     summary: 'Delete User.',
   })
+  @ApiBearerAuth()
   remove(@Param('id') id: string) {
     return this.usersService.remove(id);
   }
