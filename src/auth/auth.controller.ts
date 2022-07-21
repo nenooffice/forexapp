@@ -8,7 +8,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { User } from 'src/users/entities/user.entity';
 import { AuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
@@ -33,7 +33,8 @@ export class AuthController {
   @ApiOperation({
     summary: 'Returns authenticated user.',
   })
+  @ApiBearerAuth()
   profile(@LoggedUser() user: User) {
-    return { user };
+    return user;
   }
 }
