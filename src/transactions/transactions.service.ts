@@ -3,14 +3,11 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { Prisma } from '@prisma/client';
+import { Prisma, PrismaClient } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateTransactionDto } from './dto/create-transaction.dto';
 import fetch from 'axios';
 import { Transaction } from './entities/transaction.entity';
-import { User } from 'src/users/entities/user.entity';
-import { PrismaClient } from '@prisma/client';
-
 type Wallet<T> = { walletUSD: T; walletGBP: T };
 interface TransactionInfo {
   walletUSD: number;
