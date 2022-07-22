@@ -7,5 +7,4 @@ export class User {
   updatedAt: Date;
   walletUSD?: string;
   walletGBP?: string;
-  transactionsId?: any;
 }

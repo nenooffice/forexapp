@@ -14,7 +14,6 @@ export class UsersService {
     email: true,
     walletUSD: true,
     walletGBP: true,
-    transactions: true,
     updatedAt: true,
     createdAt: true,
   };

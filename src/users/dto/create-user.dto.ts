@@ -49,11 +49,4 @@ export class CreateUserDto {
     description: `Wallet's GBP value.`,
   })
   walletGBP: string;
-
-  @IsOptional()
-  @ApiProperty({
-    example: `"transactions": { id: 'sadgfsf234wfw', currency: 'USD', tradeValue: '200' }`,
-    description: `Transaction info.`,
-  })
-  transactionsId: any;
 }
