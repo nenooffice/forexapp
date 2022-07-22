@@ -5,4 +5,5 @@ export class Transaction {
   currencyWanted: string;
   tradeValue: string;
   currencyValue: string;
+  userId: string;
 }
